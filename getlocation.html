@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <title>GET LOACTION</title>
+    </head>
+    <body>
+        <p id="demo">CLICK BUTTON TO GET YOUR CURRENT LOCATION</p>
+        <input type="button" value="CLICK ME" onclick="getlocation()">
+    <script>
+    var x=document.getElementById("demo");
+    function getlocation()
+    {
+        if(navigator.geolocation)
+        {
+            navigator.geolocation.getCurrentPosition(showPostion,showError);
+        }
+        else
+        {
+            x.innerHTML="BROWSER DOSEN'T SUPPORT IT";
+        }
+    }
+    function showPostion(position)
+    {
+        x.innerHTML="LATITUDE: " +position.coords.latitude + "<br> LONGITUDE: " +position.coords.longitude;
+    }
+    function showError(error)
+    {
+        switch(error.code)
+        {
+            case error.INTERNAL_ERROR:
+                x.innerHTML="SOME INTERNAL ERROR OCCURED";
+                break;
+            case error.NETWORK_ERROR: 
+            x.innerHTML="SOME NETWORK ERROR OCCURED";
+            break;
+            case error.UNKNOWN_ERROR: 
+            x.innerHTML="SOME UNKNOWN ERROR OCCURED";
+        }
+    }
+    </script>
+    
+    </body>
+</html>

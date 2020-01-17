@@ -1,0 +1,41 @@
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+if(navigator.geolocation)
+{
+    navigator.geolocation.getCurrentPosition(function (p)
+    {
+      var LatLang=new google.maps.LatLang(p.coords.latitude,p.coords.longitude);
+      var mapOptions= 
+      {
+          center:LatLang,
+          zoom:15,
+          mapTypeId:google.maps.mapTypeId.ROADMAP
+      };
+    
+    var map=new google.maps.Map(document.getElementById("mapid"),mapOptions);
+    var marker=new google.maps.marker(
+    {
+        position:LatLang,
+        map:map,
+        title:"<div style='width:10px> LONGITUDE: "+p.coords.longitude+ "<br \> LATITUDE: "+p.coords.latitude
+
+    });
+    google.maps.event.addListener(marker,"click",function (e)
+    {
+    var infoWindow=new google.maps.InfoWindow();
+    infoWindow.setContent(marker.title);
+    infoWindow.open(map.marker);
+    });
+})//navigator.geolaction.getCurrentPosition
+}//if statement
+else{
+    alert("LOCATION UNAVAILABLE")
+}
+</script>
+
+    <div id="mapid" style="width: 100px; height:100px"></div>
+
+</script>
+<body>
+    <div id="mapid" style="width: 100px; height: 100px"></div>
+</body>
